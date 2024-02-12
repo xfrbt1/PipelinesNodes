@@ -17,7 +17,7 @@ from parser_producer.core.config import (
 import asyncio
 
 
-async def main_parser():
+async def records_creator():
     parser_objects_kwargs = [
         (bbc_news_parser, BBC_URL),
         (habr_news_parser, HABR_URL),
@@ -30,5 +30,4 @@ async def main_parser():
         )
         for po in parser_objects_kwargs
     ]
-    result = await asyncio.gather(*tasks)
-    return result
+    return await asyncio.gather(*tasks)
