@@ -18,16 +18,19 @@ import asyncio
 
 
 async def records_creator():
-    parser_objects_kwargs = [
-        (bbc_news_parser, BBC_URL),
-        (habr_news_parser, HABR_URL),
-        (onliner_news_parser, ONLINER_URL),
-        (chess_news_parser, CHESS_URL),
-    ]
-    tasks = [
-        records_factory(
-            soup_resp=soup_response, parser=po[0], url=po[1], headers=HEADERS
-        )
-        for po in parser_objects_kwargs
-    ]
-    return await asyncio.gather(*tasks)
+    try:
+        parser_objects_kwargs = [
+            (bbc_news_parser, BBC_URL),
+            (habr_news_parser, HABR_URL),
+            (onliner_news_parser, ONLINER_URL),
+            (chess_news_parser, CHESS_URL),
+        ]
+        tasks = [
+            records_factory(
+                soup_resp=soup_response, parser=po[0], url=po[1], headers=HEADERS
+            )
+            for po in parser_objects_kwargs
+        ]
+        return await asyncio.gather(*tasks)
+    except Exception as e:
+        print("error create records: ", e)
