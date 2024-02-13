@@ -1,19 +1,20 @@
-import logging
 from kafka import KafkaProducer
-
-# logging.basicConfig(level=logging.ERROR, format="%(asctime)s : %(message)s : ")
 
 
 def write_records_collection(
-    collection: list[bytes], kafka_host: str | list[str], kafka_topic: str
+    collection: list[bytes],
+    kafka_host: str | list[str],
+    kafka_topic: str
 ):
     try:
+
         producer = KafkaProducer(bootstrap_servers=kafka_host)
-        count = 0
+        print("\nproducer connected: ", producer.bootstrap_connected())
         for record in collection:
             producer.send(topic=kafka_topic, value=record)
-            count += 1
-        return count
+        print("\nproducer send messages: ", len(collection))
+        producer.close(1)
+        print("\nclosed, producer connection : ", producer.bootstrap_connected())
+
     except Exception as e:
-        print(e)
-        # logging.error("write exc: {}".format(e))
+        print("\nwrite exc: ", e)
