@@ -9,8 +9,6 @@ services:
     ports:
       - "9092:9092"
       - "29092:29092"
-    volumes:
-      - "kafka_data:/bitnami"
     environment:
       # KRaft settings
       - KAFKA_CFG_NODE_ID=0
@@ -29,6 +27,19 @@ services:
       interval: 3s
       timeout: 3s
       retries: 3
+
+    volumes:
+      - kafka_data:/bitnami
+
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb_container
+    hostname: mongodb_host
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongodb_data:/data/db
 
 
   redis:
@@ -55,32 +66,21 @@ services:
         condition: service_healthy
     command: poetry run python -m run
 
-  producer_worker:
+
+  consumer_loop:
     build:
-      context: ./parser_producer
-    container_name: producer_worker
+      context: ./reader_consumer
+    container_name: consumer_loop
     depends_on:
       kafka:
         condition: service_healthy
       redis:
         condition: service_healthy
-    command: poetry run celery -A celery_config.config worker --loglevel=ERROR
-
-
-  producer_beat:
-    build:
-      context: ./parser_producer
-    container_name: producer_beat
-    depends_on:
-      kafka:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-    command: poetry run celery -A celery_config.config beat --loglevel=ERROR
-
-
+      mongodb:
+        condition: service_started
+    command: poetry run python -m run
 
 volumes:
   kafka_data:
-    driver: local
+  mongodb_data:
 

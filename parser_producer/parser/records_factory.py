@@ -1,7 +1,6 @@
-from typing import Callable
-
-
-async def records_factory(soup_resp: Callable, parser: Callable, **kwargs):
-    response_result = await soup_resp(kwargs.get("url"), kwargs.get("headers"))
-    parse_result = parser(soup=response_result, **kwargs)
-    return parse_result
+async def records_factory(soup_resp, parser, picker, **kwargs) -> list:
+    response_result = await soup_resp(**kwargs)
+    parse_result: list = parser(response_result, **kwargs)
+    list_result: list = picker(parse_result, **kwargs)
+    list_result = [] if list_result is None else ...
+    return list_result

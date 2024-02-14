@@ -2,14 +2,15 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class settings(BaseSettings):
-
-    celery_broker_url: str | None = "redis://redis:6379"
-    redis_host: str | None = "redis"
-    redis_port: str | None = "6379"
-
     kafka_host: str | None = "kafka_host:9092"
     kafka_topic: str | None = "test-topic"
 
-    delay: int = 3
+    delay: int = 2
+
+    mongo_host: str = "localhost"
+    mongo_port: int = 27017
+
+    db_name: str = "news"
+    collection_name: str = "news-collection"
 
     model_config = SettingsConfigDict(env_file="./.env", env_file_encoding="utf-8")

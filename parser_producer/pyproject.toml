@@ -7,16 +7,15 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-pytest = "^8.0.0"
+
+pydantic = "^2.6.1"
+pydantic-settings = "^2.1.0"
+
+requests = "^2.31.0"
 
 httpx = "^0.26.0"
 beautifulsoup4 = "^4.12.3"
 lxml = "^5.1.0"
-
-requests = "^2.31.0"
-
-pydantic = "^2.6.1"
-pydantic-settings = "^2.1.0"
 
 redis = "^5.0.1"
 celery = "^5.3.6"
