@@ -42,4 +42,4 @@ async def records_creator() -> tuple[list]:
         ]
         return await asyncio.gather(*tasks)
     except Exception as e:
-        print("error (response_parse_pick): ", e)
+        print("error get response: ", e)

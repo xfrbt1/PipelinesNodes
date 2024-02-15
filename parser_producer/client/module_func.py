@@ -7,8 +7,9 @@ from parser_producer.producer.writer import write_records
 
 def write_func(settings):
     while True:
-        print("PRODUCE_")
         res = asyncio.run(records_creator())
+        if res is None:
+            continue
         records: list[bytes] = [json.dumps(r).encode() for r in res]
         write_records(records, settings.kafka_host, settings.kafka_topic)
         sleep(settings.delay)

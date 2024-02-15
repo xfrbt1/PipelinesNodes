@@ -1,13 +1,12 @@
-from pymongo import InsertOne
-
-
 def bulk_create(collection, documents: list[dict]):
     try:
+        documents_to_insert = [
+            doc
+            for doc in documents
+            if collection.count_documents({"title": doc["title"]}) == 0
+        ]
 
-        operations = [InsertOne(document) for document in documents]
-        result = collection.bulk_write(operations, ordered=False)
-        print("docs: {}".format(len(documents)))
-        print("inserted: {}".format(result.inserted_count))
-
+        if documents_to_insert:
+            collection.insert_many(documents_to_insert, ordered=False)
     except Exception as e:
-        print("error bulk creating: ", e)
+        print("create error: ", e)

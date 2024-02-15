@@ -40,6 +40,7 @@ services:
       - '27017:27017'
     volumes:
       - mongodb_data:/data/db
+    command: --quiet
 
 
   redis:
@@ -62,8 +63,6 @@ services:
     depends_on:
       kafka:
         condition: service_healthy
-      redis:
-        condition: service_healthy
     command: poetry run python -m run
 
 
@@ -74,11 +73,10 @@ services:
     depends_on:
       kafka:
         condition: service_healthy
-      redis:
-        condition: service_healthy
       mongodb:
         condition: service_started
     command: poetry run python -m run
+
 
 volumes:
   kafka_data:

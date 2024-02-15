@@ -14,12 +14,8 @@ def get_db_collection(client, settings):
     return collection
 
 
-def create_index_(collection, field: str, index_type, **kwargs):
-    collection.create_index((field, index_type), **kwargs)
-
-
 def return_setup(settings):
     client = get_client(settings)
     collection = get_db_collection(client, settings)
-    create_index_(collection, "title", "text", unique=True)
+    collection.create_index({"title": "text"})
     return collection

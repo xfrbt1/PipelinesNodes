@@ -10,6 +10,6 @@ class settings(BaseSettings):
     kafka_host: str | None = "kafka_host:9092"
     kafka_topic: str | None = "test-topic"
 
-    delay: int = 3
+    delay: int = 15
 
     model_config = SettingsConfigDict(env_file="./.env", env_file_encoding="utf-8")

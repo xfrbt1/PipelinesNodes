@@ -5,9 +5,9 @@ class settings(BaseSettings):
     kafka_host: str | None = "kafka_host:9092"
     kafka_topic: str | None = "test-topic"
 
-    delay: int = 2
+    delay: int = 15
 
-    mongo_host: str = "localhost"
+    mongo_host: str = "mongodb_host"
     mongo_port: int = 27017
 
     db_name: str = "news"
