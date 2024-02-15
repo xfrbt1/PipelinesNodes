@@ -1,6 +1,7 @@
 from celery import Celery
 from celery.schedules import crontab
 from parser_producer.core.settings import settings as s
+
 settings = s()
 
 

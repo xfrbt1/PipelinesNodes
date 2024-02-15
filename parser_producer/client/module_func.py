@@ -1,17 +1,15 @@
 import asyncio
 import json
-
+from time import sleep
 from parser_producer.parser.records_creator import records_creator
-from parser_producer.producer.writer import write_records_collection
-
-
-def hc_func():
-    print("| HEALTHCHECK |")
+from parser_producer.producer.writer import write_records
 
 
 def write_func(settings):
-    result = asyncio.run(records_creator())
-    records = [json.dumps(record).encode("utf-8") for record in result]
-    kafka_host = settings.kafka_host
-    kafka_topic = settings.kafka_topic
-    write_records_collection(records, kafka_host, kafka_topic)
+    while True:
+        res = asyncio.run(records_creator())
+        if res is None:
+            continue
+        records: list[bytes] = [json.dumps(r).encode() for r in res]
+        write_records(records, settings.kafka_host, settings.kafka_topic)
+        sleep(settings.delay)
