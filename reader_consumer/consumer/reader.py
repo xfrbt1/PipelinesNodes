@@ -11,5 +11,5 @@ def subscribe_consumer(kafka_host: str | list[str], kafka_topic: str) -> KafkaCo
         )
         consumer.subscribe([kafka_topic])
         return consumer
-    except Exception as e:
-        print("consumer exc: ", e)
+    except Exception:
+        ...

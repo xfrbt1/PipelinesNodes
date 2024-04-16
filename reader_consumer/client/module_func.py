@@ -14,5 +14,5 @@ def read_store_func(settings):
                 sleep(settings.delay)
                 collection = return_setup(settings)
                 bulk_create(collection, documents)
-        except Exception as e:
-            print("error polling: ", e)
+        except Exception:
+            ...

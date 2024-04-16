@@ -8,5 +8,5 @@ def bulk_create(collection, documents: list[dict]):
 
         if documents_to_insert:
             collection.insert_many(documents_to_insert, ordered=False)
-    except Exception as e:
-        print("create error: ", e)
+    except Exception:
+        ...
