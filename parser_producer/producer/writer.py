@@ -7,6 +7,5 @@ def write_records(
     try:
         producer = KafkaProducer(bootstrap_servers=kafka_host)
         [producer.send(topic=kafka_topic, value=record) for record in collection]
-        print("producer write: ", len(collection))
-    except Exception as e:
-        print("\nwrite exc: ", e)
+    except Exception:
+        ...

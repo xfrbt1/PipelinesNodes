@@ -41,5 +41,5 @@ async def records_creator() -> tuple[list]:
             for po in parser_objects_kwargs
         ]
         return await asyncio.gather(*tasks)
-    except Exception as e:
-        print("error get response: ", e)
+    except Exception:
+        ...
