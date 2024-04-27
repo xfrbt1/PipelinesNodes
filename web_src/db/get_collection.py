@@ -1,4 +1,5 @@
 from motor.motor_asyncio import AsyncIOMotorClient
+
 from web_src.core.settings import settings as Settings
 
 

@@ -1,9 +1,8 @@
+import uvicorn
 from starlette.applications import Starlette
 from starlette.routing import Route
+
 from web_src.api_handlers.news import search_titles
-
-import uvicorn
-
 
 if __name__ == "__main__":
     routes = [Route("/search-titles", search_titles)]

@@ -1,8 +1,12 @@
 import json
+import logging
 from time import sleep
+
 from reader_consumer.consumer.reader import subscribe_consumer
 from reader_consumer.db.create import bulk_create
 from reader_consumer.db.setup_db import return_setup
+
+logger = logging.getLogger(__name__)
 
 
 def read_store_func(settings):
@@ -14,5 +18,6 @@ def read_store_func(settings):
                 sleep(settings.delay)
                 collection = return_setup(settings)
                 bulk_create(collection, documents)
-        except Exception:
-            ...
+        except Exception as ex:
+            logger.exception(ex)
+
