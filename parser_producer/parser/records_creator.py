@@ -1,5 +1,6 @@
 import asyncio
-from typing import Coroutine, Callable
+import logging
+from typing import Callable, Coroutine
 
 from parser_producer.core.config import (BBC_TITLE, BBC_URL, CHESS_TITLE,
                                          CHESS_URL, HABR_TITLE, HABR_URL,
@@ -11,8 +12,6 @@ from parser_producer.parser.parse_soup_data import (bbc_news_parser,
 from parser_producer.parser.payload_creator import create_payload
 from parser_producer.parser.records_factory import records_factory
 from parser_producer.parser.soup_response import soup_response
-
-import logging
 
 logger = logging.getLogger(__name__)
 
@@ -37,4 +36,3 @@ def records_creator() -> list[Callable | Coroutine]:
         ]
     except Exception as ex:
         logger.exception(ex)
-

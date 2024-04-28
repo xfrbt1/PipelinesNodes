@@ -1,6 +1,6 @@
 from motor.motor_asyncio import AsyncIOMotorClient
 
-from web_src.core.settings import settings as Settings
+from api.core.settings import settings as Settings
 
 
 async def get_collection():

@@ -4,7 +4,7 @@ services:
 
   kafka:
     image: docker.io/bitnami/kafka:3.6
-    container_name: kafka_container
+    container_name: kafka
     hostname: kafka_host
     ports:
       - "9092:9092"
@@ -34,7 +34,7 @@ services:
 
   mongodb:
     image: mongo:latest
-    container_name: mongodb_container
+    container_name: mongodb
     hostname: mongodb_host
     ports:
       - '27017:27017'
@@ -50,7 +50,7 @@ services:
     depends_on:
       kafka:
         condition: service_healthy
-    command: poetry run python -m run
+    command: python -m run
 
 
   consumer_loop:
@@ -62,19 +62,19 @@ services:
         condition: service_healthy
       mongodb:
         condition: service_started
-    command: poetry run python -m run
+    command: python -m run
 
 
   web_app:
     build:
-      context: ./web_src
-    container_name: web_app
+      context: api
+    container_name: api
     ports:
       - "8800:8800"
     depends_on:
       mongodb:
         condition: service_started
-    command: poetry run python -m run
+    command: python -m run
 
 
 volumes:

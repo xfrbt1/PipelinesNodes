@@ -1,7 +1,7 @@
 import asyncio
 import json
-from time import sleep
 import logging
+from time import sleep
 
 from parser_producer.parser.records_creator import records_creator
 from parser_producer.producer.writer import write_records
@@ -22,6 +22,8 @@ async def write_func(settings):
         logger.info(scraping_result)
         print(scraping_result)
 
-        records: list[bytes] = [json.dumps(record).encode() for record in scraping_result]
+        records: list[bytes] = [
+            json.dumps(record).encode() for record in scraping_result
+        ]
         write_records(records, settings.kafka_host, settings.kafka_topic)
         sleep(settings.delay)

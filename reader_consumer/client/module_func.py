@@ -20,4 +20,3 @@ def read_store_func(settings):
                 bulk_create(collection, documents)
         except Exception as ex:
             logger.exception(ex)
-
