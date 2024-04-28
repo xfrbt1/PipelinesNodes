@@ -1,6 +1,6 @@
 from starlette.responses import JSONResponse
 
-from web_src.db.get_collection import get_collection
+from api.db.get_collection import get_collection
 
 
 async def search_titles(request):
@@ -19,5 +19,4 @@ async def search_titles(request):
     return JSONResponse({"result": documents}, status_code=200)
 
 
-async def all_titles(request):
-    ...
+async def all_titles(request): ...

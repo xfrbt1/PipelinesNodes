@@ -5,14 +5,10 @@ ENV PYTHONDONTWRITEBYTECODE=1
 
 WORKDIR /parser_producer
 
-COPY pyproject.toml .
+COPY requirements.txt .
 
-RUN pip install poetry
-
-RUN poetry install
+RUN pip3 install -r requirements.txt
 
 COPY . .
 
 ENV PYTHONPATH=$PYTHONPATH:/
-
-
