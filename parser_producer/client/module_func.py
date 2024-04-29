@@ -3,13 +3,13 @@ import json
 import logging
 from time import sleep
 
-from parser_producer.parser.records_creator import records_creator
 from parser_producer.producer.writer import write_records
+from parser_producer.scraper.records_creator import records_creator
 
 logger = logging.getLogger(__name__)
 
 
-async def write_func(settings):
+async def write_func(settings) -> None:
 
     while True:
         scraping_result = await asyncio.gather(*records_creator())

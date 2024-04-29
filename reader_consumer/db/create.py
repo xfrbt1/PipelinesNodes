@@ -1,5 +1,11 @@
+import logging
+
+logger = logging.getLogger(__name__)
+
+
 def bulk_create(collection, documents: list[dict]):
     try:
+
         documents_to_insert = [
             doc
             for doc in documents
@@ -8,5 +14,6 @@ def bulk_create(collection, documents: list[dict]):
 
         if documents_to_insert:
             collection.insert_many(documents_to_insert, ordered=False)
-    except Exception:
-        ...
+
+    except Exception as ex:
+        logger.exception(ex)
