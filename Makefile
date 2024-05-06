@@ -1,3 +1,6 @@
+requirements:
+	pip install -r requirements.txt
+
 start:
 	docker-compose up --build -d
 
