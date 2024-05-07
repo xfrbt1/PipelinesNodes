@@ -1,5 +1,5 @@
-from starlette.responses import JSONResponse
 from starlette.requests import Request
+from starlette.responses import JSONResponse
 
 from api.db.get_collection import get_collection
 

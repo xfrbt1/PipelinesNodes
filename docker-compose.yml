@@ -45,7 +45,7 @@ services:
 
   producer_loop:
     build:
-      context: ./parser_producer
+      context: scraper_producer
     container_name: producer_loop
     depends_on:
       kafka:
