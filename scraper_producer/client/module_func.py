@@ -3,8 +3,8 @@ import json
 import logging
 from time import sleep
 
-from parser_producer.producer.writer import write_records
-from parser_producer.scraper.records_creator import records_creator
+from scraper_producer.producer.writer import write_records
+from scraper_producer.scraper.records_creator import records_creator
 
 logger = logging.getLogger(__name__)
 
